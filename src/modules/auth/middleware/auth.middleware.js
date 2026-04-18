@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { failureResponse } from "../../../helpers/responseHandler";
+import { failureResponse } from "../../../helpers/responseHandler.js";
 
 const authMiddleware = (request, response, next) => {
   try {

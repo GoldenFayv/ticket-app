@@ -8,12 +8,16 @@ const generateOtp = () => {
 
 export const createOtp = (email) => {
   const otp = generateOtp();
-  cache.set(`otp:${email}`, otp, OTP_TTL);
-  return {otp: otp, expiresIn: OTP_TTL};
+  const key = `otp:${email}`;
+
+  cache.set(key, otp, OTP_TTL);
+  return { otp: otp, expiresIn: OTP_TTL };
 };
 
-export const verifyOtp = (email, otp) => {
-  const cached = cache.get(`otp:${email}`);
+export const compareOtp = (email, otp) => {
+  const key = `otp:${email}`;
+
+  const cached = cache.get(key);
 
   if (!cached) {
     const error = new Error("OTP has expired or does not exist");
