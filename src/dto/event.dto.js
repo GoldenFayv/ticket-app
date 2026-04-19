@@ -1,10 +1,14 @@
-import { UserDto } from "./user.dto.js";
+import TicketDto from "./ticket.dto.js";
+import UserDto from "./user.dto.js";
 
-export class EventDto{
-    constructor(event){
-        this.id = event.id,
-        this.title = event.title,
-        this.discription = event.discription,
-        this.user = new UserDto(event.user)
-    }
+class EventDto {
+  constructor(event) {
+    ((this.id = event.id),
+      (this.title = event.title),
+      (this.discription = event.discription),
+      (this.user = new UserDto(event.user)));
+    this.tickets = new TicketDto(event.tickets);
+  }
 }
+
+export default EventDto;

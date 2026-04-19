@@ -1,4 +1,4 @@
-import { UserDto } from "../../../dto/user.dto.js";
+import UserDto from "../../../dto/user.dto.js";
 import { asyncHandler } from "../../../helpers/asyncHandler.js";
 import { sendMail } from "../../../helpers/emailService.js";
 import { createOtp } from "../../../helpers/otpHandler.js";

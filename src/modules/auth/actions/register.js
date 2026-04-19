@@ -20,8 +20,8 @@ const registerUserAction = async (data) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await prisma.$transaction(async (tx) => {
-      const user = await tx.user.create({
+    const newUser = await prisma.$transaction(async (trx) => {
+      return await trx.user.create({
         data: {
           name,
           email,
@@ -35,7 +35,6 @@ const registerUserAction = async (data) => {
           updatedAt: true,
         },
       });
-      return user;
     });
 
     const token = generateToken(newUser.id);

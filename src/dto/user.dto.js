@@ -1,4 +1,4 @@
-export class UserDto {
+class UserDto {
   constructor(user) {
     this.id = user.id;
     this.name = user.name;
@@ -6,6 +6,8 @@ export class UserDto {
     this.email_verified = user.email_verified_at !== null;
     this.createdAt = user.createdAt;
     this.updatedAt = user.updatedAt;
-    this.access_token = user.token
+    this.access_token = user.token;
   }
 }
+
+export default UserDto;

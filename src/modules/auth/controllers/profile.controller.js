@@ -1,6 +1,6 @@
 import { successResponse } from "../../../helpers/responseHandler.js";
 import {prisma} from "../../../config/prisma.js"
-import { UserDto } from "../../../dto/user.dto.js";
+import UserDto from "../../../dto/user.dto.js";
 
 export async function getProfile(request, response) {
   const user = await prisma.user.findUnique({
