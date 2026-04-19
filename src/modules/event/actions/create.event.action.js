@@ -11,6 +11,10 @@ const createEvent = async (userId, payload) => {
         date: new Date(validated.date),
         user_id: userId,
       },
+      include: {
+        user: true,
+        tickets: true,
+      },
     });
 
     if (payload.tickets?.length) {
@@ -22,7 +26,13 @@ const createEvent = async (userId, payload) => {
     // for (const ticket of tickets) {
     //   await createTicket(event.id, ticket, trx);
     // }
-    return event;
+    return await trx.event.findUnique({
+      where: { id: event.id },
+      include: {
+        user: true,
+        tickets: true,
+      },
+    });
   });
 };
 

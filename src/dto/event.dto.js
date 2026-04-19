@@ -1,13 +1,15 @@
 import TicketDto from "./ticket.dto.js";
 import UserDto from "./user.dto.js";
-
-class EventDto {
+export class EventDto {
   constructor(event) {
-    ((this.id = event.id),
-      (this.title = event.title),
-      (this.discription = event.discription),
-      (this.user = new UserDto(event.user)));
-    this.tickets = new TicketDto(event.tickets);
+    this.id = event.id;
+    this.title = event.title;
+    this.description = event.description;
+    this.city = event.city;
+    this.date = event.date;
+    this.isPublished = event.isPublished;
+    this.user = new UserDto(event.user);
+    this.tickets = event.tickets?.map((ticket) => new TicketDto(ticket)) ?? [];
   }
 }
 

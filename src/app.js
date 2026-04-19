@@ -9,6 +9,6 @@ const app = express();
 app.use(express.json()); //middleware to parse json data
 
 app.use("/api/auth", authRouter);
-app.use("/api/events", authMiddleware, emailVerified, eventRouter);
+app.use("/api/events", eventRouter);
 
 export default app;
