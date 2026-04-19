@@ -1,6 +1,6 @@
 import { prisma } from "../../../config/prisma.js";
 import { createEventSchema } from "../validations/event.validation.js";
-import createTicket from "./create.ticket.action.js";
+import createTicketType from "./create.ticket.type.action.js";
 
 const createEvent = async (userId, payload) => {
   const validated = createEventSchema.parse(payload);
@@ -11,26 +11,21 @@ const createEvent = async (userId, payload) => {
         date: new Date(validated.date),
         user_id: userId,
       },
-      include: {
-        user: true,
-        tickets: true,
-      },
     });
 
-    if (payload.tickets?.length) {
+    if (payload.ticket_types?.length) {
       await Promise.all(
-        payload.tickets.map((ticket) => createTicket(event.id, ticket, trx)),
+        payload.ticket_types.map((ticket_type) =>
+          createTicketType(event.id, ticket_type, trx),
+        ),
       );
     }
-    // const tickets = payload.tickets ?? [];
-    // for (const ticket of tickets) {
-    //   await createTicket(event.id, ticket, trx);
-    // }
+
     return await trx.event.findUnique({
       where: { id: event.id },
       include: {
         user: true,
-        tickets: true,
+        ticket_types: true,
       },
     });
   });

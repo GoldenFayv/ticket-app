@@ -1,7 +1,10 @@
 import { asyncHandler } from "../../../helpers/asyncHandler.js";
 import createEvent from "../actions/create.event.action.js";
 import updateEvent from "../actions/update.event.action.js";
-import { successResponse } from "../../../helpers/responseHandler.js";
+import {
+  failureResponse,
+  successResponse,
+} from "../../../helpers/responseHandler.js";
 import EventDto from "../../../dto/event.dto.js";
 import { prisma } from "../../../config/prisma.js";
 import { includes } from "zod";
@@ -20,7 +23,7 @@ export const index = asyncHandler(async (request, response) => {
   const events = await prisma.event.findMany({
     include: {
       user: true,
-      tickets: true,
+      ticket_types: true,
     },
   });
 
@@ -34,12 +37,16 @@ export const index = asyncHandler(async (request, response) => {
 export const show = asyncHandler(async (request, response) => {
   const event = await prisma.event.findFirst({
     where: { id: Number(request.params.id) },
-    include: { user: true, tickets: true },
+    include: { user: true, ticket_types: true },
   });
+
+  if (!event) {
+    return failureResponse(response, "Resource not found", null, 404);
+  }
 
   return successResponse(
     response,
-    `${event.title}'s event retrieved!`,
+    `${event.title}' event retrieved!`,
     new EventDto(event),
   );
 });

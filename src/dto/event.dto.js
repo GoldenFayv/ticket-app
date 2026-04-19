@@ -1,4 +1,4 @@
-import TicketDto from "./ticket.dto.js";
+import TicketTypeDto from "./ticket.type.dto.js";
 import UserDto from "./user.dto.js";
 export class EventDto {
   constructor(event) {
@@ -9,7 +9,7 @@ export class EventDto {
     this.date = event.date;
     this.isPublished = event.isPublished;
     this.user = new UserDto(event.user);
-    this.tickets = event.tickets?.map((ticket) => new TicketDto(ticket)) ?? [];
+    this.ticket_types = event.ticket_types?.map((ticket) => new TicketTypeDto(ticket)) ?? [];
   }
 }
 

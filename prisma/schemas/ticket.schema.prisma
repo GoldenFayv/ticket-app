@@ -1,14 +1,20 @@
 model Ticket {
-    id Int @id @default(autoincrement())
-    name String
-    description String?
-    price Float
-    quantity Int
-    purchased_quantity Int
-    event_id Int
-    event Event @relation(fields: [event_id], references: [id])
-    createAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id     Int          @id @default(autoincrement())
+  code   String       @unique
+  status TicketStatus @default(ACTIVE)
+  name   String?
+  email  String?
+  usedAt DateTime?
 
-    @@unique([name, event_id])
+  event_id Int
+  event    Event @relation(fields: [event_id], references: [id])
+
+  order_id Int
+  order    Order @relation(fields: [order_id], references: [id], onDelete: Cascade)
+
+  ticket_type_id Int
+  ticketType     TicketType @relation(fields: [ticket_type_id], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -1,4 +1,4 @@
-class TicketDto {
+class TicketTypeDto {
   constructor(ticket) {
     ((this.id = ticket.id),
       (this.name = ticket.name),
@@ -8,4 +8,4 @@ class TicketDto {
   }
 }
 
-export default TicketDto;
+export default TicketTypeDto;

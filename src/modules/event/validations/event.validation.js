@@ -5,17 +5,15 @@ export const createEventSchema = z.object({
   description: z.string().min(5),
   city: z.string().min(2),
   date: z.coerce.date(), // ISO string
-  // price: z.number().nonnegative(),
   lga_id: z.number().nonnegative(),
-  //   totalTickets: z.number().int().positive(),
 });
 export const updateEventSchema = createEventSchema.partial();
 
-export const createTicketSchema = z.object({
+export const createTicketTypeSchema = z.object({
   name: z.string().min(2),
   description: z.string().optional(),
   price: z.number().nonnegative(),
   quantity: z.number().int().positive(),
 });
 
-export const updateTicketSchema = createTicketSchema.partial();
+export const updateTicketTypeSchema = createTicketTypeSchema.partial();

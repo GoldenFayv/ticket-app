@@ -1,7 +1,7 @@
 import { prisma } from "../../../config/prisma.js";
 import { updateEventSchema } from "../validations/event.validation.js";
-import createTicket from "./create.ticket.action.js";
-import updateTicket from "./update.ticket.action.js";
+import createTicketType from "./create.ticket.type.action.js";
+import updateTicketType from "./update.ticket.type.action.js";
 
 const updateEvent = async (userId, eventId, payload) => {
   const event = await prisma.event.findUnique({
@@ -27,9 +27,9 @@ const updateEvent = async (userId, eventId, payload) => {
 
     for (const ticket of payload.tickets ?? []) {
       if (ticket.id) {
-        await updateTicket(eventId, Number(ticket.id), ticket, trx);
+        await updateTicketType(eventId, Number(ticket.id), ticket, trx);
       } else {
-        await createTicket(eventId, ticket, trx);
+        await createTicketType(eventId, ticket, trx);
       }
     }
 
@@ -37,7 +37,7 @@ const updateEvent = async (userId, eventId, payload) => {
       where: { id: eventId },
       include: {
         user: true,
-        tickets: true,
+        ticket_types: true,
       },
     });
   });
