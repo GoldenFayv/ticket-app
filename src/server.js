@@ -1,6 +1,6 @@
 import loadEnv from "./config/env.js";
 import app from "./app.js";
-
+import { verifyPendingTransactionsJob } from "./modules/payment/jobs/payment.job.js";
 
 try {
   loadEnv();
@@ -8,6 +8,8 @@ try {
     console.error("Error starting the server: ", error);
     process.exit(1);
   });
+
+  verifyPendingTransactionsJob(); // start the job
 
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
