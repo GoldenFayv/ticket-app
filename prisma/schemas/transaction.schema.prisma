@@ -1,0 +1,22 @@
+model Transaction {
+  id           Int               @id @default(autoincrement())
+  reference    String            @unique
+  amount       Float
+  status       TransactionStatus @default(PENDING)
+  provider     String
+  provider_ref String?
+  paidAt       DateTime?
+  meta         Json?
+
+  orders       Order[]
+
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REVERSED
+}

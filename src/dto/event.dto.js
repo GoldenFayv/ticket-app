@@ -8,7 +8,7 @@ export class EventDto {
     this.city = event.city;
     this.date = event.date;
     this.isPublished = event.isPublished;
-    this.user = new UserDto(event.user);
+    this.user = event.user ? new UserDto(event.user) : null;
     this.ticket_types = event.ticket_types?.map((ticket) => new TicketTypeDto(ticket)) ?? [];
   }
 }
