@@ -9,12 +9,13 @@ try {
     process.exit(1);
   });
 
-  verifyPendingTransactionsJob(); // start the job
-
+  
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
+  
+  verifyPendingTransactionsJob(); // start the job
 } catch (error) {
   console.error("Error starting the server: ", error);
   process.exit(1);

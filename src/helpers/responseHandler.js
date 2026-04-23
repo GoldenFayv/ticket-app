@@ -23,3 +23,20 @@ export const failureResponse = (
     errors,
   });
 };
+
+export const validationErrorResponse = (
+  response,
+  error,
+  message = "Validation failed",
+) => {
+  const issues = error?.issues ?? error?.errors ?? [];
+
+  return response.status(422).json({
+    status: "__validationError__",
+    message,
+    errors: issues.map((e) => ({
+      field: e.path.join("."),
+      message: e.message,
+    })),
+  });
+};

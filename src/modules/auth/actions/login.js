@@ -2,6 +2,7 @@ import { loginSchema } from "../authValidation.js";
 import { generateToken } from "../services/authService.js";
 import { prisma } from "../../../config/prisma.js";
 import bcrypt from "bcryptjs";
+import CustomException from "../../../exceptions/customException.js";
 
 const login = async (data) => {
   try {
@@ -19,9 +20,7 @@ const login = async (data) => {
 
     const passwordMatches = await bcrypt.compare(password, user.password);
     if (!passwordMatches) {
-      const error = new Error("Invalid credentials!");
-      error.statusCode = 401;
-      throw error;
+      throw new CustomException("Invalid credentials", 400);
     }
 
     const token = generateToken(user.id);
