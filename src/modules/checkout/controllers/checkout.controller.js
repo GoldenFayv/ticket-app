@@ -13,3 +13,7 @@ export const store = asyncHandler(async (request, response) => {
     201,
   );
 });
+
+// export const index = asyncHandler(async (request, response) => {
+//
+// });

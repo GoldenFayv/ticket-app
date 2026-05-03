@@ -8,7 +8,7 @@ import verifyTransaction from "../actions/verify.transaction.action.js";
 
 export const store = asyncHandler(async (request, response) => {
   const link = await getPaymentLink(request.body, request?.user);
-  return successResponse(response, "Payment link", link, null, 200);
+  return successResponse(response, "Payment link", link, 200);
 });
 
 export const show = asyncHandler(async (request, response) => {

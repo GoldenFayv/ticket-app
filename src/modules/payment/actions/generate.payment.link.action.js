@@ -2,7 +2,7 @@ import axios from "axios";
 
 const generatePaymentLink = async (payload) => {
   const baseUrl = process.env.FPS_BASE_URL;
-  const url = `${baseUrl}/transaction/initialize`;
+  const url = `${baseUrl}/payments`;
 
   const response = await axios.post(url, payload, {
     headers: {
